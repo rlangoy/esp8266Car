@@ -5,41 +5,24 @@
   <meta charset="UTF-8">
   <title>DIY Car Remote </title>
   <link rel="stylesheet" href="main.css"> 
-  <script src="WebSocket.js" type="text/javascript"></script>
+  <!-- <script src="WebSocket.js" type="text/javascript"></script>
+  -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
-  <!--
-  rangeslider.js 
-  See: http://rangeslider.js.org/
-
-
-<input type="range" class="enabled" id="Slider1" min="0" max="1024" value="10">
-<input type="text" id="Value1" value="xxx">
--->
-
-
    <center>
         <header>
             <h1>Controller</h1>
         </header>
-        <div>
-            <table>
-                <tr>
-                	 <!-- https://github.com/bobboteck/JoyStick -->
-                  <script src="joy.min.js"></script>
-                  <div id="joyDiv" style="width:200px;height:200px;margin-bottom:20px;"></div>
-                  <script type="text/javascript">
-                  // Create JoyStick object into the DIV 'joyDiv'
-                  var joy = new JoyStick('joyDiv');
-                  </script>
-                </tr>
-                <td style="width:14.4px; text-align: right">: </td>
-              		<td>  </td>
-            </table>
-        </div>
+         
+         <div id="joystick_base" > 
+          <canvas id="myCanvas" width="200" height="200"></canvas>
+          <script src='nipplejs.min.js'></script>
+          <script src="index.js" type="text/javascript"></script>
+
+          </div>
     </center>
 
 
