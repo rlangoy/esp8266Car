@@ -332,11 +332,11 @@ input[type=range].verSlider {
   width: 200px;
   margin: 9.2px 0;
 
-    -webkit-transform:rotate(90deg); 
-     -moz-transform:rotate(90deg); 
-     -o-transform:rotate(90deg); 
-     -ms-transform:rotate(90deg); 
-     transform:rotate(90deg); 
+    -webkit-transform:rotate(-90deg); 
+     -moz-transform:rotate(-90deg); 
+     -o-transform:rotate(-90deg); 
+     -ms-transform:rotate(-90deg); 
+     transform:rotate(-90deg); 
 
 
 }

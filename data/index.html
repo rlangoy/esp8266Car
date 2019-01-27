@@ -23,14 +23,18 @@
 
    <center>
         <header>
-            <h1>Direction</h1>
+            <h1>Controller</h1>
         </header>
         <div>
             <table>
                 <tr>
-                	
-                    <td><input type="range" class="horSlider" id="Slider1" min="0" max="1024" value="10"></td><sp><sp>
-                    <td style="width:14.4px; text-align: left"> <p style="margin-left: 10px" id="Slider1TextVal"> 10 </p> </td>
+                	 <!-- https://github.com/bobboteck/JoyStick -->
+                  <script src="joy.min.js"></script>
+                  <div id="joyDiv" style="width:200px;height:200px;margin-bottom:20px;"></div>
+                  <script type="text/javascript">
+                  // Create JoyStick object into the DIV 'joyDiv'
+                  var joy = new JoyStick('joyDiv');
+                  </script>
                 </tr>
                 <td style="width:14.4px; text-align: right">: </td>
               		<td>  </td>
@@ -40,26 +44,7 @@
 
 
 
-   <center>
-        <header>
-            <h1>Speed</h1>
-        </header>
-        <div>
-            <table>
-                <tr>
-                	 <br>
-                   <br>
-                   <br>
-                   <br>
-               
-                    <td><input type="range"  class="verSlider"   id="SliderAlarm" min="0" max="1024" value="10" onmouseup="sendMoisture();"   ontouchend="sendMoisture();" ></td><sp><sp>
-                    <td style="width:14.4px; text-align: left"> <p style="margin-left: 10px" id="SliderAlarmTextVal" > 10 </p> </td>
-                </tr>
-                <td style="width:14.4px; text-align: right">: </td>
-              		<td>  </td>
-            </table>
-        </div>
-    </center>
+   
 
 
 
