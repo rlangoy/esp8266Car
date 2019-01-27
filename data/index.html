@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>DIY Car Remote </title>
+  <link rel="stylesheet" href="main.css"> 
+  <script src="WebSocket.js" type="text/javascript"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <!--
+  rangeslider.js 
+  See: http://rangeslider.js.org/
+
+
+<input type="range" class="enabled" id="Slider1" min="0" max="1024" value="10">
+<input type="text" id="Value1" value="xxx">
+-->
+
+
+   <center>
+        <header>
+            <h1>Direction</h1>
+        </header>
+        <div>
+            <table>
+                <tr>
+                	
+                    <td><input type="range" class="horSlider" id="Slider1" min="0" max="1024" value="10"></td><sp><sp>
+                    <td style="width:14.4px; text-align: left"> <p style="margin-left: 10px" id="Slider1TextVal"> 10 </p> </td>
+                </tr>
+                <td style="width:14.4px; text-align: right">: </td>
+              		<td>  </td>
+            </table>
+        </div>
+    </center>
+
+
+
+   <center>
+        <header>
+            <h1>Speed</h1>
+        </header>
+        <div>
+            <table>
+                <tr>
+                	 <br>
+                   <br>
+                   <br>
+                   <br>
+               
+                    <td><input type="range"  class="verSlider"   id="SliderAlarm" min="0" max="1024" value="10" onmouseup="sendMoisture();"   ontouchend="sendMoisture();" ></td><sp><sp>
+                    <td style="width:14.4px; text-align: left"> <p style="margin-left: 10px" id="SliderAlarmTextVal" > 10 </p> </td>
+                </tr>
+                <td style="width:14.4px; text-align: right">: </td>
+              		<td>  </td>
+            </table>
+        </div>
+    </center>
+
+
+
+</body>
+
+</html>
