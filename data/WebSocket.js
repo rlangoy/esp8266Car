@@ -2,9 +2,7 @@ var rainbowEnable = false;
 var connection = new WebSocket('ws://'+location.hostname+':81/', ['arduino']);
 connection.onopen = function () {
     connection.send('Connect ' + new Date());
-
     connection.send("I123"); // Send Msg to recieve GUI update
-
     //Debugonnection.send(rgbstr);
     //document.getElementById("Slider1TextVal").style = "background-color:lightgreen";
 };
@@ -16,26 +14,15 @@ connection.onerror = function (error) {
 connection.onmessage = function (e) {  
     console.log('Server: ', e.data);
 
-    //  obj = '{"A0":"0"}'   // Expected input string
-    var obj = JSON.parse(e.data); 
-    if(obj.hasOwnProperty('A0')){
-       document.getElementById('Slider1').value = obj.A0;
-       document.getElementById("Slider1TextVal").innerHTML  = obj.A0;  // Show value
-    }     
- 
-   if(obj.hasOwnProperty('MoistAlarmValue')){
-       document.getElementById('SliderAlarm').value = obj.MoistAlarmValue;
-       document.getElementById("SliderAlarmTextVal").innerHTML  = obj.MoistAlarmValue;  // Show value
-    }     
-  
-
 };
 
 connection.onclose = function(){
     console.log('WebSocket connection closed');
     //Debug
-    document.getElementById("Slider1TextVal").style = "background-color:red";
+    //document.getElementById("Slider1TextVal").style = "background-color:red";
 };
+
+
 
 function sendRGB() {
     var r = document.getElementById('r').value**2/1023;
