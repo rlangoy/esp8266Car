@@ -1,9 +1,10 @@
+
 /*
-  Joustick code from:
+  Joystick code from:
   https://github.com/yoannmoinet/nipplejs
 */
 
-/*
+
 var connection = new WebSocket('ws://'+location.hostname+':81/', ['arduino']);
 
 connection.onopen = function () {
@@ -17,13 +18,13 @@ connection.onopen = function () {
 connection.onerror = function (error) {
     console.log('WebSocket Error ', error);
 };
-c
-onnection.onmessage = function (e) {  
+
+connection.onmessage = function (e) {  
     console.log('Server: ', e.data);
-}
+};
 
 
-*/
+
 
 var radius = 100;
 var sampleJoystick = {
@@ -53,6 +54,11 @@ joystick.on('start end', function(evt, data)
   var ySpeed= data.distance*Math.sin(data.angle.radian)/100.0;
 
   console.log('X:', xSpeed, 'Y: ', ySpeed);
+  ySpeed=ySpeed*1024;
+  xSpeed=xSpeed*1024;
+  connection.send("X" + xSpeed.toString(10)); // Send Msg to recieve GUI update
+  connection.send("Y" + ySpeed.toString(10)); // Send Msg to recieve GUI update
+  
  
   
  // motor1=

@@ -21,11 +21,11 @@ const char wifiInitialApPassword[] = "123456789";
 
 DNSServer dnsServer;
 
-#define CAR_M1A     02            // Motor 1
+#define CAR_M1A     05            // Motor 1
 #define CAR_M1B     04
 
 #define CAR_M2A     00            // Motor 2
-#define CAR_M2B     05
+#define CAR_M2B     02
 
 #define LED_U       16            //Onboard LED
 
@@ -55,6 +55,15 @@ void setup() {
   pinMode(CAR_M1B, OUTPUT);
   pinMode(CAR_M2A, OUTPUT);     
   pinMode(CAR_M2B, OUTPUT);    
+
+
+  digitalWrite(CAR_M1A, HIGH);   
+  digitalWrite(CAR_M2A, HIGH);   
+              
+  digitalWrite(CAR_M1B, HIGH);   
+  digitalWrite(CAR_M2B, HIGH);   
+
+
 
   //Init debug led
   pinMode(LED_U, OUTPUT);      // Initialize the LED_BUILTIN pin as an output
@@ -281,6 +290,51 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght
              webSocket.broadcastTXT(JSONmessage);    // send message to all connected web-sockets
 
         }
+        else if (payload[0] == 'Y') 
+        {
+            int ySpeed = (uint32_t) strtol((const char *) &payload[1], NULL, 10);    
+            
+            // Set motor direction
+            if(ySpeed<-400)
+            { digitalWrite(CAR_M1A, LOW);  
+              digitalWrite(CAR_M2A, LOW);  
+  
+              digitalWrite(CAR_M1B, HIGH);   
+              digitalWrite(CAR_M2B, HIGH);  
+              Serial.printf("Hi- " ); 
+
+            }
+            else  if (ySpeed<400)
+            {
+              digitalWrite(CAR_M1A, HIGH);   
+              digitalWrite(CAR_M2A, HIGH);   
+              
+              digitalWrite(CAR_M1B, HIGH);   
+              digitalWrite(CAR_M2B, HIGH);   
+              Serial.printf("off " );
+            }
+            
+            if(ySpeed>400)
+            { digitalWrite(CAR_M1A, HIGH);   
+              digitalWrite(CAR_M2A, HIGH);   
+
+              digitalWrite(CAR_M1B, LOW);   
+              digitalWrite(CAR_M2B, LOW);   
+               Serial.printf("Hi+ " );
+            }
+
+            //Set Motor Speed  
+            //analogWrite(CAR_M1B,ySpeed);
+            //analogWrite(CAR_M2B,ySpeed);
+            Serial.printf("Speed %d \n", ySpeed);  
+              
+        }
+        else if (payload[0] == 'X') 
+        {
+            int xSpeed = (uint32_t) strtol((const char *) &payload[1], NULL, 10);   
+        }
+
+
 
       break;
   }
