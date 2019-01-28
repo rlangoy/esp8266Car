@@ -57,11 +57,11 @@ void setup() {
   pinMode(CAR_M2B, OUTPUT);    
 
 
-  digitalWrite(CAR_M1A, HIGH);   
-  digitalWrite(CAR_M2A, HIGH);   
+  digitalWrite(CAR_M1A, LOW);   
+  digitalWrite(CAR_M2A, LOW);   
               
-  digitalWrite(CAR_M1B, HIGH);   
-  digitalWrite(CAR_M2B, HIGH);   
+  digitalWrite(CAR_M1B, LOW);   
+  digitalWrite(CAR_M2B, LOW);   
 
 
 
@@ -262,6 +262,10 @@ void handleFileUpload(){ // upload a new file to the SPIFFS
   }
 }
 
+//
+//
+bool m_NoSpeed=true;
+
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght) { // When a WebSocket message is received
   switch (type) {
     case WStype_DISCONNECTED:             // if the websocket is disconnected
@@ -293,7 +297,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght
         else if (payload[0] == 'Y') 
         {
             int ySpeed = (uint32_t) strtol((const char *) &payload[1], NULL, 10);    
-            
+            m_NoSpeed=false;
             // Set motor direction
             if(ySpeed<-400)
             { digitalWrite(CAR_M1A, LOW);  
@@ -306,12 +310,13 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght
             }
             else  if (ySpeed<400)
             {
-              digitalWrite(CAR_M1A, HIGH);   
-              digitalWrite(CAR_M2A, HIGH);   
+              digitalWrite(CAR_M1A, LOW);   
+              digitalWrite(CAR_M2A, LOW);   
               
-              digitalWrite(CAR_M1B, HIGH);   
-              digitalWrite(CAR_M2B, HIGH);   
+              digitalWrite(CAR_M1B, LOW);   
+              digitalWrite(CAR_M2B, LOW);   
               Serial.printf("off " );
+               m_NoSpeed=true;
             }
             
             if(ySpeed>400)
@@ -331,7 +336,30 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght
         }
         else if (payload[0] == 'X') 
         {
-            int xSpeed = (uint32_t) strtol((const char *) &payload[1], NULL, 10);   
+          int xSpeed = (uint32_t) strtol((const char *) &payload[1], NULL, 10);  
+          if( m_NoSpeed==true)
+          {
+            
+            if(xSpeed<-400)
+              { digitalWrite(CAR_M1A, LOW);  
+                digitalWrite(CAR_M2A, HIGH);  
+    
+                digitalWrite(CAR_M1B, LOW);   
+                digitalWrite(CAR_M2B, LOW);  
+                Serial.printf("Left " ); 
+  
+              }
+              
+              if(xSpeed>400)
+              { digitalWrite(CAR_M1A, HIGH);   
+                digitalWrite(CAR_M2A, LOW);   
+  
+                digitalWrite(CAR_M1B, LOW);   
+                digitalWrite(CAR_M2B, LOW);   
+                Serial.printf("Right " );
+              }
+          }
+                
         }
 
 
